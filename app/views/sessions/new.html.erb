@@ -1,0 +1,10 @@
+<%= semantic_form_for @user_session do |form| %>
+  <%= form.input :identification %>
+  <%= form.input :password %>
+  <%= form.input :remember_me, as: "boolean" %>
+
+
+  <%= form.actions do %>
+    <%= form.action :submit, :as => :button %>
+  <% end %>
+<% end %>

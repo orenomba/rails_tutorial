@@ -1,0 +1,7 @@
+<div class="hero-unit">
+  <h1>welcome</h1>
+</div>
+
+<% if logged_in? %>
+  <h1><%= link_to "秘密のリンク", user_path(current_user) %></h1>
+<% end %>
