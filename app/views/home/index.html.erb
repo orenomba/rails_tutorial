@@ -2,6 +2,8 @@
   <h1>welcome</h1>
 </div>
 
+<h1><%= link_to "強制エラー（Production時にメールで通知）", raise_path %></h1>
+
 <% if logged_in? %>
   <h1><%= link_to "秘密のリンク", user_path(current_user) %></h1>
 <% end %>

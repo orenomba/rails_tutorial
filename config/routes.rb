@@ -5,6 +5,8 @@ RailsTutorial::Application.routes.draw do
   resources :users
   resources :sessions
   
+  get "raise" => "home#raise", :as => "raise"
+  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

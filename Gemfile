@@ -18,6 +18,11 @@ gem 'squeel'
 gem 'formtastic-bootstrap', :git => "https://github.com/niedfelj/formtastic-bootstrap.git", :branch => 'bootstrap2-rails3-2-formtastic-2-2'
 gem "i18n_generators"
 
+#http://stackoverflow.com/questions/3524127/exception-notification-gem-and-rails-3
+#https://github.com/smartinez87/exception_notification
+gem 'exception_notification', :require => 'exception_notifier'
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

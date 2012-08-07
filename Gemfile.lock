@@ -76,6 +76,8 @@ GEM
       unf (~> 0.0.3)
     erubis (2.7.0)
     eventmachine (0.12.10)
+    exception_notification (2.6.1)
+      actionmailer (>= 3.0.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.0.0)
@@ -251,6 +253,7 @@ DEPENDENCIES
   annotate!
   capybara!
   coffee-rails (~> 3.2.1)
+  exception_notification
   factory_girl_rails
   formtastic-bootstrap!
   growl
