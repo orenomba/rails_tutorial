@@ -35,7 +35,7 @@ describe User do
     FactoryGirl.build(:user, email: "test").should_not be_valid
   end
   
-  describe "on save" do
+  describe "on create" do
     it "should have a name" do
       FactoryGirl.build(:user, name: "   ").should_not be_valid
     end
@@ -53,6 +53,11 @@ describe User do
       FactoryGirl.build(:user, name: chars).should_not be_valid
     end
     
+    it "should have a name in a format" do
+      chars = "/" * 8
+      FactoryGirl.build(:user, name: chars).should_not be_valid
+    end
+    
     it "should have a name no more than 50 letter long" do
       chars = "a" * 51
       FactoryGirl.build(:user, name: chars).should_not be_valid
@@ -66,6 +71,36 @@ describe User do
     it "should have a password no more than 20 letter long" do
       pw = "a" * 21
       FactoryGirl.build(:user, password: pw, password_confirmation: pw).should_not be_valid
+    end
+  end
+  
+  describe "on update" do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+    end
+    
+    it "won't require a password" do
+      @user.password = ""
+      @user.should be_valid
+    end
+    
+    describe "if password is set" do
+      before(:each) do
+        @user.password = "x" * 8
+        @user.password_confirmation = @user.password
+      end
+
+      it "should have length" do
+        @user.password = "x" * 3
+        @user.password_confirmation = @user.password
+        @user.should_not be_valid
+      end
+      
+      it "should have confirmation" do
+        @user.password = "x" * 8
+        @user.password_confirmation = "a" * 8
+        @user.should_not be_valid
+      end
     end
   end
   

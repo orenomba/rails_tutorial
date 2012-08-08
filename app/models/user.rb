@@ -32,9 +32,15 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   
   validates :name, :email, presence: true, uniqueness: true
+  validates :name, :format => { 
+    :with => /\A[a-zA-Z\d_]+\z/, 
+    :message => I18n.t("activerecord.errors.messages.invalid") 
+  }
   validates :email, email_address: true
   validates :name, length: { in: 4..50 }
-  validates :password, confirmation: true, length: { in: 8..20 }
+  validates :password, length: { in: 8..20 }, :if => :password?
+  validates :password, presence: {on: :create}
+  validates :password, confirmation: true, :if => :password?
   
   class << self
     def name?(guess)
@@ -49,4 +55,9 @@ class User < ActiveRecord::Base
       return user.name if user
     end
   end
+  
+  private
+    def password?
+      password.present?
+    end
 end
