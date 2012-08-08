@@ -211,6 +211,7 @@ ja:
     labels:
       user:
         avatar: アバター
+        remove_avatar: アバター削除
         name: ユーザー名
         email: Eメール
         password: パスワード

@@ -102,6 +102,15 @@ describe User do
         @user.should_not be_valid
       end
     end
+    
+    it "should remove avatar by remove_avatar attribute" do
+      @user.avatar = File.open File.join(File.dirname(__FILE__), "user", "avatar.jpg")
+      @user.save!
+      @user.avatar.should be_file
+
+      @user.update_attributes({"remove_avatar" => "1"})
+      @user.avatar.should_not be_file
+    end
   end
   
   describe "name?" do

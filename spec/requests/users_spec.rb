@@ -11,28 +11,40 @@ describe "users" do
     it "should show page" do
       page.should have_content "登録"
     end
+    
+    describe "create" do
+      before(:each) do
+        visit signup_path
+      end
+      
+      it "should show errors" do
+        click_button "登録"
+        page.should have_selector "div.error", count: 3
+      end
+      
+      it "should register" do
+        fill_in "user_name", with: "test"
+        fill_in "user_email", with: "test@domain.local"
+        fill_in "user_password", with: "a" * 8
+        fill_in "user_password_confirmation", with: "a" * 8
+        click_button "登録"
+        
+        page.should have_content "登録しました"
+      end
+      
+      it "should be able to set avatar" do
+        attach_file('user_avatar', File.join(File.dirname(__FILE__), "users", "avatar.jpg"))
+        fill_in "user_name", with: "test"
+        fill_in "user_email", with: "test@domain.local"
+        fill_in "user_password", with: "a" * 8
+        fill_in "user_password_confirmation", with: "a" * 8
+        click_button "登録"
+        
+        User.first.avatar.should be_file
+      end
+    end
   end
   
-  describe "create" do
-    before(:each) do
-      visit signup_path
-    end
-
-    it "should show errors" do
-      click_button "登録"
-      page.should have_selector "div.error", count: 3
-    end
-    
-    it "should register" do
-      fill_in "user_name", with: "test"
-      fill_in "user_email", with: "test@domain.local"
-      fill_in "user_password", with: "a" * 8
-      fill_in "user_password_confirmation", with: "a" * 8
-      click_button "登録"
-      
-      page.should have_content "登録しました"
-    end
-  end
   
   describe "show" do
     before(:each) do
@@ -80,9 +92,6 @@ describe "users" do
     end
 
     describe "update" do
-      before(:each) do
-      end
-      
       it "should update" do
         lambda{
           fill_in "user_email", with: "edit@domain.local"
@@ -102,6 +111,26 @@ describe "users" do
           click_button "編集"
           @user.reload
         }.should_not change(@user, :name).from("test").to("changed")
+      end
+      
+      describe "avatar" do
+        before(:each) do
+          @user.avatar = File.open File.join(File.dirname(__FILE__), "users", "avatar.jpg")
+          @user.save!
+          visit edit_user_path @user
+        end
+        
+        it "should be able to remove avatar" do
+          check "user_remove_avatar"
+          click_button "編集"
+
+          # なぜかreloadだとavatarがリロードされない
+          # rails console だとちゃんとリロードされている
+          # TODO @user.reload
+          @user = User.find @user.id
+          
+          @user.avatar.should_not be_file
+        end
       end
     end
   end

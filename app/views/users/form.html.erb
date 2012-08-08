@@ -6,6 +6,10 @@
 
 <%= semantic_form_for @user do |form| %>
   <%= form.input :avatar %>
+  <% if @user.avatar.file? %>
+    <%= image_tag @user.avatar.url :thumb %>
+    <%= form.input :remove_avatar, as: :boolean %>
+  <% end %>
   <%= form.input :name, input_html: name_options %>
   <%= form.input :email %>
   <%= form.input :password %>

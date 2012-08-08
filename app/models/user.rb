@@ -28,7 +28,8 @@ end
 
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
-  attr_accessible :name, :email, :password, :password_confirmation, :avatar
+  attr_accessor :remove_avatar
+  attr_accessible :name, :email, :password, :password_confirmation, :avatar, :remove_avatar
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   
   validates :name, :email, presence: true, uniqueness: true
@@ -41,6 +42,8 @@ class User < ActiveRecord::Base
   validates :password, length: { in: 8..20 }, :if => :password?
   validates :password, presence: {on: :create}
   validates :password, confirmation: true, :if => :password?
+  
+  before_save :should_remove_avatar?, :if => :remove_avatar?
   
   class << self
     def name?(guess)
@@ -59,5 +62,15 @@ class User < ActiveRecord::Base
   private
     def password?
       password.present?
+    end
+    
+    def remove_avatar?
+      not @remove_avatar.to_i.zero?
+    end
+    
+    def should_remove_avatar?
+      self.avatar.destroy
+      
+      true
     end
 end
