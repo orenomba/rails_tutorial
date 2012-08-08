@@ -205,10 +205,12 @@ ja:
         
     hints:
       user:
+        name: アルファベット、数字 _(アンダースコア)のみで入力してください
         password_confirmation: パスワードと同じものを入力してください
     
     labels:
       user:
+        avatar: アバター
         name: ユーザー名
         email: Eメール
         password: パスワード
@@ -221,6 +223,8 @@ ja:
         
     actions:
       create: 登録
+      user:
+        update: 編集
       
       session:
         create: "ログイン"

@@ -60,5 +60,50 @@ describe "users" do
       end
     end
   end
+  
+  describe "edit" do
+    before(:each) do
+      @user = FactoryGirl.create :user, name: "test", email: "test@domain.local", password: "a" * 8
+      visit login_path
+      fill_in "session_identification", with: "test"
+      fill_in "session_password", with: "a" * 8
+      click_button "ログイン"
+      visit edit_user_path(@user)
+    end
+    
+    it "should show page" do
+      page.should have_content "編集"
+    end
+    
+    it "should have name disabled" do
+      page.should have_selector "#user_name.disabled"
+    end
+
+    describe "update" do
+      before(:each) do
+      end
+      
+      it "should update" do
+        lambda{
+          fill_in "user_email", with: "edit@domain.local"
+          click_button "編集"
+          @user.reload
+        }.should change(@user, :email).from("test@domain.local").to("edit@domain.local")
+      end
+
+      it "should show message" do
+        click_button "編集"
+        page.should have_content "編集しました"
+      end
+      
+      it "should not update name" do
+        lambda{
+          fill_in "user_name", with: "changed"
+          click_button "編集"
+          @user.reload
+        }.should_not change(@user, :name).from("test").to("changed")
+      end
+    end
+  end
 end
 

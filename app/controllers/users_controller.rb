@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    render :form
   end
   
   def create
@@ -12,7 +13,28 @@ class UsersController < ApplicationController
       flash[:success] = "ユーザー登録しました！"
       redirect_to root_url
     else
-      render :new
+      render :form
     end
   end
+  
+  def edit
+    find
+    render :form
+  end
+  
+  def update
+    find
+    
+    if @user.update_attributes(params[:user].reject{|key| key == :name})
+      flash[:success] = "ユーザー編集しました！"
+      redirect_to edit_user_path @user
+    else
+      render :form
+    end
+  end
+  
+  private 
+    def find
+      @user = User.find params[:id]
+    end
 end
