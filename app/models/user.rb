@@ -12,6 +12,10 @@
 #  updated_at                   :datetime         not null
 #  remember_me_token            :string(255)
 #  remember_me_token_expires_at :datetime
+#  avatar_file_name             :string(255)
+#  avatar_content_type          :string(255)
+#  avatar_file_size             :integer
+#  avatar_updated_at            :datetime
 #
 
 class EmailAddressValidator < ActiveModel::EachValidator
@@ -24,8 +28,8 @@ end
 
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
-  attr_accessible :name, :email, :password, :password_confirmation
-  
+  attr_accessible :name, :email, :password, :password_confirmation, :avatar
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   
   validates :name, :email, presence: true, uniqueness: true
   validates :email, email_address: true
