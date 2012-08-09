@@ -23,6 +23,7 @@ gem "i18n_generators"
 gem 'exception_notification', :require => 'exception_notifier'
 
 gem "paperclip"
+gem "unicorn"
 
 # Gems used only for assets and not required
 # in production environments by default.
