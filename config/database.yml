@@ -24,7 +24,7 @@ production:
   reconnect:  false
   database:   rails_tutorial_production
   pool:       5
-  username:   rails_tutorial
-  password:   rails_tutorial_password
+  username:   password
+  password:   password
   host:       localhost
   socket:     rails_tutorial
