@@ -6,6 +6,10 @@ before 'deploy:setup', 'rvm:install_ruby'  # install Ruby and create gemset, or:
 before 'deploy:setup', 'rvm:create_gemset' # only create gemset
 
 
+#bundler
+require "bundler/capistrano"
+
+
 require 'capistrano_colors'
 set :application, "rails_tutorial"
 set :repository,  "git@github.com:orenomba/rails_tutorial.git"
