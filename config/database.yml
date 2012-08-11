@@ -27,4 +27,4 @@ production:
   username:   password
   password:   password
   host:       localhost
-  socket:     rails_tutorial
+  socket:     ﻿/var/run/mysqld/mysqld.sock
