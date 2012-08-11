@@ -1,13 +1,12 @@
-#rvm
+#rvm bundler
 require "rvm/capistrano"
+require "bundler/capistrano"
 set :rvm_ruby_string, '1.9.3@rails_tutorial'
+set :rvm_type, :user
+
 before 'deploy:setup', 'rvm:install_rvm'   # install RVM
 before 'deploy:setup', 'rvm:install_ruby'  # install Ruby and create gemset, or:
 before 'deploy:setup', 'rvm:create_gemset' # only create gemset
-
-
-#bundler
-require "bundler/capistrano"
 
 
 require 'capistrano_colors'
