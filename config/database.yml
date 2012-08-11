@@ -24,7 +24,7 @@ production:
   reconnect:  false
   database:   rails_tutorial_production
   pool:       5
-  username:   password
+  username:   rails_tutorial
   password:   password
   host:       localhost
   socket:     ﻿/var/run/mysqld/mysqld.sock
