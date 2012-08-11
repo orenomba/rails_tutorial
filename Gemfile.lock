@@ -26,6 +26,13 @@ GIT
       formtastic (~> 2.2.0)
       rails (>= 3.2.0)
 
+GIT
+  remote: https://github.com/sosedoff/capistrano-unicorn.git
+  revision: bafc12cd8235307d30b5c85259914d17c5ece2d3
+  specs:
+    capistrano-unicorn (0.1.6)
+      capistrano
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -60,6 +67,13 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
+    capistrano (2.12.0)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+    capistrano_colors (0.5.5)
     childprocess (0.3.4)
       ffi (~> 1.0, >= 1.0.6)
     cocaine (0.2.1)
@@ -100,6 +114,7 @@ GEM
     guard-spork (1.1.0)
       guard (>= 1.1)
       spork (>= 0.8.4)
+    highline (1.6.13)
     hike (1.2.1)
     httpauth (0.1)
     i18n (0.6.0)
@@ -139,8 +154,16 @@ GEM
     mime-types (1.19)
     multi_json (1.3.6)
     multipart-post (1.1.5)
+    mysql2 (0.3.11)
     net-http-digest_auth (1.2.1)
     net-http-persistent (2.7)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.5.2)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
     nokogiri (1.5.5)
     ntlm-http (0.1.1)
     oauth (0.4.6)
@@ -204,6 +227,8 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.11.0)
     rubyzip (0.9.9)
+    rvm-capistrano (1.2.5)
+      capistrano (>= 2.0.0)
     sass (3.1.20)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -264,6 +289,9 @@ PLATFORMS
 
 DEPENDENCIES
   annotate!
+  capistrano
+  capistrano-unicorn!
+  capistrano_colors
   capybara!
   coffee-rails (~> 3.2.1)
   exception_notification
@@ -274,10 +302,12 @@ DEPENDENCIES
   guard-spork
   i18n_generators
   jquery-rails
+  mysql2
   paperclip
   quiet_assets
   rails (= 3.2.7)
   rspec-rails
+  rvm-capistrano
   sass-rails (~> 3.2.3)
   sorcery
   sqlite3

@@ -24,6 +24,7 @@ gem 'exception_notification', :require => 'exception_notifier'
 
 gem "paperclip"
 gem "unicorn"
+gem "mysql2"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -49,4 +50,8 @@ group :development do
   gem "quiet_assets"    
   gem "annotate", :git => "https://github.com/ctran/annotate_models.git"
   gem 'growl'
+  gem "capistrano"
+  gem "rvm-capistrano"
+  gem "capistrano_colors"
+  gem 'capistrano-unicorn', :require => false, :git => "https://github.com/sosedoff/capistrano-unicorn.git"
 end
